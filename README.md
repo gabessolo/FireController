@@ -7,4 +7,4 @@ The fire dialogue protocol is as follows:
 2)subscription request
 3)waiting for acknowledgment
 4)listen in a loop for commands from the server
-order fulfillment
+5)order fulfillment
