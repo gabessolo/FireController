@@ -13,5 +13,5 @@ The fire dialogue protocol is as follows:
 the java fire listen on port 88
 the structure of the command is define into common.h file and also in FireControl.h file
 
-The Fire controler is able to control unlimited number of file
+The Fire controler is able to control unlimited number of fire
 the fire just have to follow the protocol and communicate on TCP IP
