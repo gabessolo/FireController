@@ -1,0 +1,173 @@
+2020-04-19 17:45:55	*** MANAGEMENT OF FIRE CONTROL !!!   ***
+
+2020-04-19 17:47:11	*** MANAGEMENT OF FIRE CONTROL !!!   ***
+
+2020-04-19 17:47:58	*** MANAGEMENT OF FIRE CONTROL !!!   ***
+
+2020-04-19 17:47:58	Timeout:10---Instance:1---Port:61---Adr IP:127.0.0.1---
+typeMSG: ABONNEMENT
+typeCli: FIRECTRL
+Color: INCONNU(-858993460)
+
+2020-04-19 17:47:58	A Firectrl is subscribed !
+
+2020-04-19 17:47:58	Client : FIRECTRL - Instance : -858993460
+
+2020-04-19 17:47:59	Timeout:10---Instance:1---Port:76---Adr IP:127.0.0.1---
+typeMSG: ABONNEMENT
+typeCli: FIRE
+Color: GREEN
+
+2020-04-19 17:47:59	FIRE is subscribed !
+
+ added receaved - total Fire subscribed: 1
+
+2020-04-19 17:47:59	Client : FIRE - Instance : 1
+
+2020-04-19 17:47:59	Timeout:10---Instance:2---Port:77---Adr IP:127.0.0.1---
+typeMSG: ABONNEMENT
+typeCli: FIRE
+Color: GREEN
+
+2020-04-19 17:47:59	NOTIFICATION of new FIRE added receaved - total Fire subscribed: 2
+
+2020-04-19 17:47:59	FIRE is subscribed !
+
+2020-04-19 17:47:59	Client : FIRE - Instance : 2
+
+2020-04-19 17:48:00	Timeout:10---Instance:3---Port:78---Adr IP:127.0.0.1---
+typeMSG: ABONNEMENT
+typeCli: FIRE
+Color: YELLOW
+
+2020-04-19 17:48:00	FIRE is subscribed !
+
+2020-04-19 17:48:00	NOTIFICATION of new FIRE added receaved - total Fire subscribed: 3
+
+2020-04-19 17:48:00	Client : FIRE - Instance : 3
+
+2020-04-19 17:48:00	Timeout:10---Instance:4---Port:79---Adr IP:127.0.0.1---
+typeMSG: ABONNEMENT
+typeCli: FIRE
+Color: YELLOW
+
+2020-04-19 17:48:00	FIRE is subscribed !
+
+ added receaved - total Fire subscribed: 4
+
+2020-04-19 17:48:00	Client : FIRE - Instance : 4
+
+2020-04-19 17:49:28	*** MANAGEMENT OF FIRE CONTROL !!!   ***
+
+2020-04-19 17:49:29	Timeout:10---Instance:1---Port:775369265---Adr IP:面面=---
+typeMSG: INCONNU(774909488)
+typeCli: INCONNU(-859045839)
+Color: INCONNU(-858993460)
+
+2020-04-19 17:49:29	Client : Inconnu - Instance :??? 
+
+2020-04-19 17:49:29	Timeout:10---Instance:1---Port:775369265---Adr IP:面面L---
+typeMSG: INCONNU(774909488)
+typeCli: INCONNU(-859045839)
+Color: GREEN
+
+2020-04-19 17:49:29	Client : Inconnu - Instance :??? 
+
+2020-04-19 17:49:30	Timeout:10---Instance:2---Port:775369265---Adr IP:面面M---
+typeMSG: INCONNU(774909488)
+typeCli: INCONNU(-859045839)
+Color: GREEN
+
+2020-04-19 17:49:30	Client : Inconnu - Instance :??? 
+
+2020-04-19 17:49:30	Timeout:10---Instance:3---Port:775369265---Adr IP:面面N---
+typeMSG: INCONNU(774909488)
+typeCli: INCONNU(-859045839)
+Color: YELLOW
+
+2020-04-19 17:49:30	Client : Inconnu - Instance :??? 
+
+2020-04-19 17:49:31	Timeout:10---Instance:4---Port:775369265---Adr IP:面面O---
+typeMSG: INCONNU(774909488)
+typeCli: INCONNU(-859045839)
+Color: YELLOW
+
+2020-04-19 17:49:31	Client : Inconnu - Instance :??? 
+
+2020-04-19 17:49:41	Timeout:17---Instance:5---Port:88---Adr IP:127.0.0.1---
+typeMSG: ABONNEMENT
+typeCli: JAVA
+Color: GREEN
+
+2020-04-19 17:49:41	JAVA is subscribed !
+
+2020-04-19 17:49:41	NOTIFICATION of new JAVA added receaved - total Fire subscribed: 5
+
+2020-04-19 17:49:41	Client : JAVA - Instance : 5
+
+2020-04-19 17:50:52	*** MANAGEMENT OF FIRE CONTROL !!!   ***
+
+2020-04-19 17:50:53	Timeout:10---Instance:1---Port:61---Adr IP:127.0.0.1---
+typeMSG: ABONNEMENT
+typeCli: FIRECTRL
+Color: INCONNU(-858993460)
+
+2020-04-19 17:50:53	A Firectrl is subscribed !
+
+2020-04-19 17:50:53	Client : FIRECTRL - Instance : -858993460
+
+2020-04-19 17:50:53	Timeout:10---Instance:1---Port:76---Adr IP:127.0.0.1---
+typeMSG: ABONNEMENT
+typeCli: FIRE
+Color: GREEN
+
+2020-04-19 17:50:53	FIRE is subscribed !
+
+2020-04-19 17:50:53	Client : FIRE - Instance : 1
+
+2020-04-19 17:50:53	NOTIFICATION of new FIRE added receaved - total Fire subscribed: 1
+
+2020-04-19 17:50:54	Timeout:10---Instance:2---Port:77---Adr IP:127.0.0.1---
+typeMSG: ABONNEMENT
+typeCli: FIRE
+Color: GREEN
+
+2020-04-19 17:50:54	NOTIFICATION of new FIRE added receaved - total Fire subscribed: 2
+
+2020-04-19 17:50:54	FIRE is subscribed !
+
+2020-04-19 17:50:54	Client : FIRE - Instance : 2
+
+2020-04-19 17:50:54	Timeout:10---Instance:3---Port:78---Adr IP:127.0.0.1---
+typeMSG: ABONNEMENT
+typeCli: FIRE
+Color: YELLOW
+
+2020-04-19 17:50:54	FIRE is subscribed !
+
+2020-04-19 17:50:54	NOTIFICATION of new FIRE added receaved - total Fire subscribed: 3
+
+2020-04-19 17:50:54	Client : FIRE - Instance : 3
+
+2020-04-19 17:50:55	Timeout:10---Instance:4---Port:79---Adr IP:127.0.0.1---
+typeMSG: ABONNEMENT
+typeCli: FIRE
+Color: YELLOW
+
+2020-04-19 17:50:55	NOTIFICATION of new FIRE added receaved - total Fire subscribed: 4
+
+2020-04-19 17:50:55	FIRE is subscribed !
+
+2020-04-19 17:50:55	Client : FIRE - Instance : 4
+
+2020-04-19 17:51:07	Timeout:17---Instance:5---Port:88---Adr IP:127.0.0.1---
+typeMSG: ABONNEMENT
+typeCli: JAVA
+Color: GREEN
+
+2020-04-19 17:51:08	JAVA is subscribed !
+
+2020-04-19 17:51:08	NOTIFICATION of new JAVA added receaved - total Fire subscribed: 5
+
+2020-04-19 17:51:08	Client : JAVA - Instance : 5
+

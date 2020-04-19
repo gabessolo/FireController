@@ -15,45 +15,24 @@ int err = WSAStartup(wVersionRequested, &wsaData);
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #endif
+
+#include <sstream>
+#include <ctime>
+#include <fstream>      // std::ofstream
+#include "common.h"
+#define _CRT_SECURE_NO_WARNINGS
+
+extern std::time_t time_now;
+extern /*inline*/ string getCurrentDateTime(string s);
+extern /*inline*/ const std::tm localtime_xp(std::time_t timer);
+
+
 namespace FireCtrlManagement
 {
-#define PORT_BUS      13374
-#define PORT_FIRE     23374
-#define PORT_FIRECTRL 33374
 
-#define MAX_FIRE    4
-#define IP_BUS      "127.0.0.1"
-
-#define REFRESH_TIMEOUT 5000 /* frequence d'émission des commandes */ 
-
-	enum typeMsg
+	struct _MSG
 	{
-		ALARM = 0,
-		ABO = 1,
-		ACK = 2,
-		CMD = 3,
-		NOTIF_NEW_FIRE
-	};
-
-	enum typeClient
-	{
-		FIRE = 0,
-		FIRECTRL = 1
-	};
-
-	enum typeColor
-	{
-		
-		RED,
-		GREEN,
-		YELLOW,
-	
-	};
-
-
-	struct MSG
-	{
-		int  m_Timeout; /* seconds*/
+		int  m_Timeout; // seconds
 		//typeCmd  m_Command;
 		typeColor  m_Color;
 		int  m_Instance;
@@ -70,8 +49,8 @@ namespace FireCtrlManagement
 		int m_socketFireCtrl;
 		int m_socketBus;
 #endif
+		int m_Num;
 	};
-
 	class CCOMCtrl
 	{
 	protected:
@@ -81,8 +60,8 @@ namespace FireCtrlManagement
 		bool m_bAck; // true si la demande d'abonnement est acquitté
 
 
-		vector<struct MSG> m_VecMsg;
-		queue<struct MSG>  m_QueueMsg;
+		vector<struct _MSG> m_VecMsg;
+		queue<struct _MSG>  m_QueueMsg;
 
 		char* m_myName;
 #ifdef WIN32
@@ -96,27 +75,39 @@ namespace FireCtrlManagement
 
 #ifdef WIN32
 		struct sockaddr_in m_destination;
-		void SEND(SOCKET socket, struct MSG& msg);
-		virtual void receive_send(SOCKET socket, struct MSG& msg) = 0;
+		void SEND(SOCKET socket, struct _MSG& msg);
+		void SEND2(SOCKET socket, struct _MSG& msg);
+		virtual void receive_send(SOCKET socket, struct _MSG& msg) = 0;
 
 #else
 		struct sockaddr_in m_destination;
-		void SEND(int socket, struct MSG& msg);
+		void SEND(int socket, struct _MSG& msg);
+		void SEND2(SOCKET socket, struct _MSG& msg);
 		virtual void receive_send(int socket, struct MSG& msg) = 0;
 
 #endif
 
 		void close();
-
-
 		void _connect(const char* ip, int port);
 		void _connect();
-		void initMsg(struct MSG& msg);
+		void initMsg(struct _MSG& msg);
+		//
+		virtual int init()
+		{
+			return 0;
+		}
 
-		virtual int init() = 0;
+		//
+		virtual void subscription()
+		{
+		
+		}
+		
+		//
+		virtual void Display(struct _MSG& msg)
+		{
 
-		virtual void subscription() = 0;
-
+		}
 		static DWORD WINAPI myThread(LPVOID arg)
 		{
 			CCOMCtrl *tr = (CCOMCtrl *)arg;
@@ -148,12 +139,12 @@ namespace FireCtrlManagement
 	{
 	protected:
 		static int m_Instance;
-
+		int m_Num;
 		void process();
 #ifdef WIN32
-		void  receive_send(SOCKET socket, struct MSG& msg);
+		void  receive_send(SOCKET socket, struct _MSG& msg);
 #else
-		void  receive_send(int socket, struct MSG& msg);
+		void  receive_send(int socket, struct _MSG& msg);
 #endif
 		int   init();
 		void  subscription();
@@ -166,6 +157,7 @@ namespace FireCtrlManagement
 			m_nbFireCtrl = -1;
 			m_nbBus = -1;
 			m_Instance++;
+			m_Num = m_Instance;
 			if (m_Instance== 1)
 				m_Color= GREEN;
 			if (m_Instance == 2)
@@ -185,13 +177,14 @@ namespace FireCtrlManagement
 	{
 	protected:
 	
-		
+	virtual void Display(struct _MSG& msg);
+
 	int init();
 	#ifdef WIN32
-		void  receive_send(SOCKET socket, struct MSG& msg);
+		void  receive_send(SOCKET socket, struct _MSG& msg);
 		SOCKET m_Socket2;
 	#else
-		void  receive_send(int socket, struct MSG& msg);
+		void  receive_send(int socket, struct _MSG& msg);
 		int m_Socket2;
 	#endif
 		void process();
@@ -218,12 +211,12 @@ namespace FireCtrlManagement
 	protected:
 		static int m_Instance;
 		bool m_bFull;
-
+		int m_Num;
 		int init();
 #ifdef WIN32
-		void  receive_send(SOCKET socket, struct MSG& msg);
+		void  receive_send(SOCKET socket, struct _MSG& msg);
 #else
-		void receive_send(int socket, struct MSG& msg);
+		void receive_send(int socket, struct _MSG& msg);
 #endif
 		void  subscription();
 		void process();
@@ -237,6 +230,7 @@ namespace FireCtrlManagement
 			m_nbBus = -1;
 			m_bFull = m_bAck = false;
 			m_Instance++;
+			m_Num = m_Instance;
 		}
 		virtual ~CFireControl();
 		bool isFull() { return m_nbFire < MAX_FIRE; }
@@ -244,11 +238,11 @@ namespace FireCtrlManagement
 
 
 	//thread qui va seconder le FireController
-	class CommandHandler
+	class CommandHandler:public CCOMCtrl
 	{
 	protected:
-		struct MSG m_Msg;
-		vector<struct MSG>& m_VecMsg;
+		struct _MSG m_Msg;
+		vector<struct _MSG>& m_VecMsg;
 		void process();
 
 		static DWORD WINAPI myThread(LPVOID arg)
@@ -264,13 +258,15 @@ namespace FireCtrlManagement
 		{
 			DWORD dwThreadId = 0;
 			HANDLE th = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)myThread, (LPVOID)this, 0, &dwThreadId);
-		};
-
-		CommandHandler(vector<struct MSG>& vecMsg) : m_VecMsg(vecMsg)
-		{
-			;
 		}
 
+		CommandHandler(vector<struct _MSG>& vecMsg) : m_VecMsg(vecMsg)
+		{
+		}
+		
+		void receive_send(SOCKET socket, struct _MSG& msg)
+		{
+		}
 		void _connect(const char* ip, int port);
 		void _connect2(const char* ip, int port);
 
@@ -278,12 +274,12 @@ namespace FireCtrlManagement
 		SOCKET m_Socket;
 		SOCKET m_Socket2;
 		struct sockaddr_in m_destination;
-		void SEND(SOCKET socket, struct MSG& msg);
+		void SEND(SOCKET socket, struct _MSG& msg);
 		#else
 		int m_Socket;
 		int m_Socket2;
 		struct sockaddr_in m_destination;
-		void SEND(int socket, struct MSG& msg);
+		void SEND(int socket, struct _MSG& msg);
 		#endif
 
 		virtual ~CommandHandler()
@@ -291,7 +287,7 @@ namespace FireCtrlManagement
 
 		}
 
-		const char* getName() { return "CommandHandler"; }
+		const char* getName() { return "CmdHandler "; }
 	};
 }
 
